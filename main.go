@@ -7,7 +7,8 @@ import (
 )
 
 func main() {
-	sum := d01.Day01_1()
+	// sum := d01.Day01_1()
+	sum := d01.Day01_2()
 
 	log.Printf("Done: %d\n", sum)
 }
