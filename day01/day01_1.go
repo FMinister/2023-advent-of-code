@@ -29,7 +29,7 @@ var digits = map[string]int{
 }
 
 func Day01_1() int {
-	fileText := hf.OpenAndReadFile("./day01/input1.txt")
+	fileText := hf.OpenAndReadFile("./day01/input.txt")
 
 	sum := 0
 
@@ -48,7 +48,7 @@ func Day01_1() int {
 }
 
 func Day01_2() int {
-	fileText := hf.OpenAndReadFile("./day01/input1.txt")
+	fileText := hf.OpenAndReadFile("./day01/input.txt")
 
 	sum := 0
 	re := regexp.MustCompile(`\d|one|two|three|four|five|six|seven|eight|nine`)
