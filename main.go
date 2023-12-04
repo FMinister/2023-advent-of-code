@@ -3,12 +3,14 @@ package main
 import (
 	"log"
 
-	d01 "github.com/FMinister/2023-advent-of-code/day01"
+	// d01 "github.com/FMinister/2023-advent-of-code/day01"
+	d02 "github.com/FMinister/2023-advent-of-code/day02"
 )
 
 func main() {
-	// sum := d01.Day01_1()
-	sum := d01.Day01_2()
+	// sumDay1Part1 := d01.Day01_1()
+	// sumDay1Part2 := d01.Day01_2()
+	sumDay2Part1 := d02.Day02_1()
 
-	log.Printf("Done: %d\n", sum)
+	log.Printf("Done: %d\n", sumDay2Part1)
 }
