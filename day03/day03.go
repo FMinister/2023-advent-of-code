@@ -88,13 +88,8 @@ func Day03_2() int {
 			matchesBesides := reDigit.FindAllStringSubmatchIndex(fileText[i][spec-1:spec+2], -1)
 			matchesBelow := reDigit.FindAllStringSubmatchIndex(fileText[i+1][spec-1:spec+2], -1)
 
-			// log.Printf("matchesAbove: %v, %v", fileText[i-1][spec-3:spec+4], matchesAbove)
-			// log.Printf("matchesBesides: %v, %v", fileText[i][spec-3:spec+4], matchesBesides)
-			// log.Printf("matchesBelow: %v, %v", fileText[i+1][spec-3:spec+4], matchesBelow)
-
 			if len(matchesAbove) == 2 {
 				matchAbove := reDigit.FindAllStringSubmatchIndex(fileText[i-1][spec-3:spec+4], -1)
-				// log.Printf("matchAbove: %v %v", matchAbove, fileText[i-1][spec-3+matchAbove[0][0]:spec-3+matchAbove[0][1]])
 
 				match1, _ := strconv.Atoi(fileText[i-1][spec-3+matchAbove[0][0] : spec-3+matchAbove[0][1]])
 				match2, _ := strconv.Atoi(fileText[i-1][spec-3+matchAbove[1][0] : spec-3+matchAbove[1][1]])
@@ -103,7 +98,6 @@ func Day03_2() int {
 			}
 			if len(matchesBesides) == 2 {
 				matchBeside := reDigit.FindAllStringSubmatchIndex(fileText[i][spec-3:spec+4], -1)
-				// log.Printf("matchBeside: %v %v", matchBeside, fileText[i][spec-3+matchBeside[0][0]:spec-3+matchBeside[0][1]])
 
 				match1, _ := strconv.Atoi(fileText[i][spec-3+matchBeside[0][0] : spec-3+matchBeside[0][1]])
 				match2, _ := strconv.Atoi(fileText[i][spec-3+matchBeside[1][0] : spec-3+matchBeside[1][1]])
@@ -112,7 +106,6 @@ func Day03_2() int {
 			}
 			if len(matchesBelow) == 2 {
 				matchBelow := reDigit.FindAllStringSubmatchIndex(fileText[i+1][spec-3:spec+4], -1)
-				// log.Printf("matchBelow: %v %v", matchBelow, fileText[i+1][spec-3+matchBelow[0][0]:spec-3+matchBelow[0][1]])
 
 				match1, _ := strconv.Atoi(fileText[i+1][spec-3+matchBelow[0][0] : spec-3+matchBelow[0][1]])
 				match2, _ := strconv.Atoi(fileText[i+1][spec-3+matchBelow[1][0] : spec-3+matchBelow[1][1]])
@@ -131,9 +124,6 @@ func Day03_2() int {
 						matchAbove = matchAbove[1:]
 					}
 				}
-
-				// log.Printf("matchAbove: %v %v", matchAbove, fileText[i-1][spec-3+matchAbove[0][0]:spec-3+matchAbove[0][1]])
-				// log.Printf("matchBeside: %v %v", matchBeside, fileText[i][spec-3+matchBeside[0][0]:spec-3+matchBeside[0][1]])
 
 				match1, _ := strconv.Atoi(fileText[i-1][spec-3+matchAbove[0][0] : spec-3+matchAbove[0][1]])
 				match2, _ := strconv.Atoi(fileText[i][spec-3+matchBeside[0][0] : spec-3+matchBeside[0][1]])
@@ -158,9 +148,6 @@ func Day03_2() int {
 					}
 				}
 
-				// log.Printf("matchAbove: %v %v", matchAbove, fileText[i-1][spec-3+matchAbove[0][0]:spec-3+matchAbove[0][1]])
-				// log.Printf("matchBelow: %v %v", matchBelow, fileText[i+1][spec-3+matchBelow[0][0]:spec-3+matchBelow[0][1]])
-
 				match1, _ := strconv.Atoi(fileText[i-1][spec-3+matchAbove[0][0] : spec-3+matchAbove[0][1]])
 				match2, _ := strconv.Atoi(fileText[i+1][spec-3+matchBelow[0][0] : spec-3+matchBelow[0][1]])
 
@@ -176,9 +163,6 @@ func Day03_2() int {
 						matchBelow = matchBelow[1:]
 					}
 				}
-
-				// log.Printf("matchBelow: %v %v", matchBelow, fileText[i+1][spec-3+matchBelow[0][0]:spec-3+matchBelow[0][1]])
-				// log.Printf("matchBeside: %v %v", matchBeside, fileText[i][spec-3+matchBeside[0][0]:spec-3+matchBeside[0][1]])
 
 				match1, _ := strconv.Atoi(fileText[i+1][spec-3+matchBelow[0][0] : spec-3+matchBelow[0][1]])
 				match2, _ := strconv.Atoi(fileText[i][spec-3+matchBeside[0][0] : spec-3+matchBeside[0][1]])
