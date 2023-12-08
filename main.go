@@ -16,7 +16,8 @@ func main() {
 	// sumDay2Part2 := d02.Day02_2()
 	// sumDay3Part1 := d03.Day03_1()
 	// sumDay3Part2 := d03.Day03_2()
-	sumDay4Part1 := d04.Day04_1()
+	// sumDay4Part2 := d04.Day04_1()
+	sumDay4Part2 := d04.Day04_2()
 
-	log.Printf("Done: %d\n", sumDay4Part1)
+	log.Printf("Done: %d\n", sumDay4Part2)
 }
