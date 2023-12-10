@@ -1,8 +1,10 @@
 package day05
 
 import (
+	"log"
 	"regexp"
 	"strings"
+	"sync"
 
 	hf "github.com/FMinister/2023-advent-of-code/helperfunctions"
 )
@@ -136,4 +138,97 @@ func Day05_2() int {
 	}
 
 	return locations
+}
+
+func Day05_2_goroutines() int {
+	fileText := hf.OpenAndReadFile("./day05/input.txt")
+	log.Printf("File read")
+
+	re := regexp.MustCompile(`(\d+)`)
+
+	seedStrings := re.FindAllString(strings.Split(fileText[0], ":")[1], -1)
+	seeds := []Map{}
+	for i := 0; i < len(seedStrings); i = i + 2 {
+		destStart := hf.StringToInt(seedStrings[i])
+		rangeLen := hf.StringToInt(seedStrings[i+1])
+		seeds = append(seeds, Map{destStart, 0, rangeLen})
+	}
+
+	maps := [][]Map{}
+	m := []Map{}
+
+	for i := 3; i < len(fileText); i++ {
+		line := fileText[i]
+
+		xToYMap := re.FindAllString(line, -1)
+
+		if len(xToYMap) == 0 {
+			if len(m) > 0 {
+				maps = append(maps, m)
+				m = []Map{}
+			}
+			continue
+		} else {
+			destStart := hf.StringToInt(xToYMap[0])
+			sourceStart := hf.StringToInt(xToYMap[1])
+			rangeLen := hf.StringToInt(xToYMap[2])
+
+			m = append(m, Map{destStart, sourceStart, rangeLen})
+		}
+	}
+
+	maps = append(maps, m)
+
+	location := -1
+	var mu sync.Mutex
+	resultChannel := make(chan int)
+
+	var wg sync.WaitGroup
+
+	for _, seed := range seeds {
+		wg.Add(1)
+
+		go func(seed Map) {
+			defer wg.Done()
+
+			locations := -1
+
+			for i := seed.destStart; i < seed.destStart+seed.rangeLen; i++ {
+				currentSeed := i
+				for _, m := range maps {
+					for _, n := range m {
+						if n.sourceStart <= currentSeed && currentSeed < n.sourceStart+n.rangeLen {
+							currentSeed = n.destStart + currentSeed - n.sourceStart
+							break
+						}
+					}
+				}
+
+				if locations == -1 {
+					locations = currentSeed
+				} else if locations > currentSeed {
+					locations = currentSeed
+				}
+			}
+
+			resultChannel <- locations
+		}(seed)
+	}
+
+	go func() {
+		wg.Wait()
+		close(resultChannel)
+	}()
+
+	for result := range resultChannel {
+		mu.Lock()
+		if location == -1 {
+			location = result
+		} else if location > result {
+			location = result
+		}
+		mu.Unlock()
+	}
+
+	return location
 }
