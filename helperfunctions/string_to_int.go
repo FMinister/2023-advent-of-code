@@ -10,3 +10,16 @@ func StringToInt(s string) int {
 
 	return result
 }
+
+func StringsToInts(s []string) []int {
+	results := []int{}
+	for _, item := range s {
+		result, err := strconv.Atoi(item)
+		if err != nil {
+			panic(err)
+		}
+		results = append(results, result)
+
+	}
+	return results
+}
