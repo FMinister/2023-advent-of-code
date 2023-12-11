@@ -47,3 +47,58 @@ func Day06_1() int {
 
 	return wins
 }
+
+func Day06_2() int {
+	fileText := hf.OpenAndReadFile("./day06/input.txt")
+
+	time := 0
+	distance := 0
+	re := regexp.MustCompile(`(\d+)`)
+
+	for i := 0; i < len(fileText); i++ {
+		line := fileText[i]
+
+		timeOrDist := re.FindAllString(line, -1)
+
+		timeOrDistString := ""
+
+		for _, item := range timeOrDist {
+			timeOrDistString += item
+		}
+
+		if time == 0 {
+			time = hf.StringToInt(timeOrDistString)
+		} else {
+			distance = hf.StringToInt(timeOrDistString)
+		}
+	}
+
+	minWin := 0
+	maxWin := 0
+
+	for i := 0; i < time; i++ {
+		speed := i
+		timeCharging := i
+		timeSprinting := time - timeCharging
+		distanceTravelled := timeSprinting * speed
+		if distanceTravelled > distance {
+			minWin = i
+			break
+		}
+	}
+
+	for i := time; i > 0; i-- {
+		speed := i
+		timeCharging := i
+		timeSprinting := time - timeCharging
+		distanceTravelled := timeSprinting * speed
+		if distanceTravelled > distance {
+			maxWin = i
+			break
+		}
+	}
+
+	wins := maxWin - minWin + 1
+
+	return wins
+}
