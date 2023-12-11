@@ -69,6 +69,46 @@ func Day07_1() int {
 	return sum
 }
 
+func Day07_2() int {
+	fileText := hf.OpenAndReadFile("./day07/input.txt")
+
+	camelCards := []CamelCards{}
+	winners := winningTypes
+
+	for _, line := range fileText {
+		items := strings.Split(line, " ")
+		camelCards = append(camelCards, CamelCards{cardToCardAndWorthPart2(items[0]), hf.StringToInt(items[1])})
+		winningType := sortToWinningTypePart2(camelCards[len(camelCards)-1].cards)
+		winners[winningType] = append(winners[winningType], CamelCards{cardToCardAndWorthPart2(items[0]), hf.StringToInt(items[1])})
+	}
+
+	for _, winner := range winners {
+		slices.SortFunc(winner, func(i, j CamelCards) int {
+			for k := 0; k < len(i.cards); k++ {
+				if i.cards[k].worth > j.cards[k].worth {
+					return 1
+				}
+				if i.cards[k].worth < j.cards[k].worth {
+					return -1
+				}
+			}
+			return 0
+		})
+	}
+
+	sum := 0
+	count := 1
+
+	for _, winningType := range winningSequence {
+		for _, winner := range winners[winningType] {
+			sum = sum + winner.bid*count
+			count++
+		}
+	}
+
+	return sum
+}
+
 func cardToCardAndWorth(card string) []Card {
 	cards := []Card{}
 	for _, c := range card {
@@ -81,6 +121,28 @@ func cardToCardAndWorth(card string) []Card {
 			cards = append(cards, Card{"Q", 12})
 		case 'J':
 			cards = append(cards, Card{"J", 11})
+		case 'T':
+			cards = append(cards, Card{"T", 10})
+		default:
+			cards = append(cards, Card{string(c), hf.StringToInt(string(c))})
+		}
+	}
+
+	return cards
+}
+
+func cardToCardAndWorthPart2(card string) []Card {
+	cards := []Card{}
+	for _, c := range card {
+		switch c {
+		case 'A':
+			cards = append(cards, Card{"A", 14})
+		case 'K':
+			cards = append(cards, Card{"K", 13})
+		case 'Q':
+			cards = append(cards, Card{"Q", 12})
+		case 'J':
+			cards = append(cards, Card{"J", 0})
 		case 'T':
 			cards = append(cards, Card{"T", 10})
 		default:
@@ -121,6 +183,68 @@ func sortToWinningType(cards []Card) string {
 			return "Two pair"
 		}
 		if card == 2 {
+			twoPairsOption = true
+		}
+	}
+
+	if fullHouseOption {
+		return "Three of a kind"
+	}
+	if twoPairsOption {
+		return "One pair"
+	}
+
+	return "High card"
+}
+
+func sortToWinningTypePart2(cards []Card) string {
+	cardCount := make([]int, 15)
+
+	for _, card := range cards {
+		cardCount[card.worth]++
+	}
+
+	fullHouseOption := false
+	twoPairsOption := false
+
+	if cardCount[0] > 0 {
+		maxCards := 0
+		jokerToPlaceIndex := 0
+		for i := 0; i < len(cardCount); i++ {
+			if cardCount[i] == 0 || i == 0 {
+				continue
+			} else if cardCount[i] > maxCards {
+				maxCards = cardCount[i]
+				jokerToPlaceIndex = i
+			}
+		}
+
+		if jokerToPlaceIndex == 0 {
+			return "Five of a kind"
+		}
+		cardCount[jokerToPlaceIndex] = cardCount[jokerToPlaceIndex] + cardCount[0]
+	}
+
+	for i := 1; i < len(cardCount); i++ {
+		if cardCount[i] >= 5 {
+			return "Five of a kind"
+		}
+		if cardCount[i] == 4 {
+			return "Four of a kind"
+		}
+		if cardCount[i] == 2 && fullHouseOption {
+			return "Full house"
+		}
+		if cardCount[i] == 3 {
+			fullHouseOption = true
+		}
+		if cardCount[i] == 3 && twoPairsOption {
+			return "Full house"
+		}
+		if cardCount[i] == 2 && twoPairsOption {
+			return "Two pair"
+		}
+		if cardCount[i] == 2 {
 			twoPairsOption = true
 		}
 	}
