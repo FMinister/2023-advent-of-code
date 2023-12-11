@@ -8,7 +8,8 @@ import (
 	// d03 "github.com/FMinister/2023-advent-of-code/day03"
 	// d04 "github.com/FMinister/2023-advent-of-code/day04"
 	// d05 "github.com/FMinister/2023-advent-of-code/day05"
-	d06 "github.com/FMinister/2023-advent-of-code/day06"
+	// d06 "github.com/FMinister/2023-advent-of-code/day06"
+	d07 "github.com/FMinister/2023-advent-of-code/day07"
 )
 
 func main() {
@@ -24,7 +25,8 @@ func main() {
 	// sumDay5Part2 := d05.Day05_2()
 	// sumDay5Part2 := d05.Day05_2_goroutines()
 	// sumDay6Part1 := d06.Day06_1()
-	sumDay6Part2 := d06.Day06_2()
+	// sumDay6Part2 := d06.Day06_2()
+	sumDay7Part1 := d07.Day07_1()
 
-	log.Printf("Done: %d\n", sumDay6Part2)
+	log.Printf("Done: %d\n", sumDay7Part1)
 }
