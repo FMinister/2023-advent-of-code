@@ -11,13 +11,13 @@ So far, the following days have been covered ⏳(TODO), ✔️(DONE):
 | ✔️ | [Day 1: Trebuchet?!](./day01)|
 | ✔️ | [Day 2: Cube Conundrum](./day02)|
 | ✔️ | [Day 3: Gear Ratios](./day03)|
-| ⏳ | [Day 4: Scratchcards](./day04)|
-| ⏳ | [Day 5: If You Give A Seed A Fertilizer](./day05)|
-| ⏳ | [Day 6: ...](./day06)|
-| ⏳ | [Day 7: ...](./day07)|
-| ⏳ | [Day 8: ...](./day08)|
-| ⏳ | [Day 9: ...](./day09)|
-| ⏳ | [Day 10: ...](./day10)|
+| ✔️ | [Day 4: Scratchcards](./day04)|
+| ✔️ | [Day 5: If You Give A Seed A Fertilizer](./day05)|
+| ✔️ | [Day 6: Wait For It](./day06)|
+| ⏳ | [Day 7: Camel Cards](./day07)|
+| ⏳ | [Day 8: Haunted Wasteland](./day08)|
+| ⏳ | [Day 9: Mirage Maintenance](./day09)|
+| ⏳ | [Day 10: Pipe Maze](./day10)|
 | ⏳ | [Day 11: ...](./day11)|
 | ⏳ | [Day 12: ...](./day12)|
 | ⏳ | [Day 13: ...](./day13)|
